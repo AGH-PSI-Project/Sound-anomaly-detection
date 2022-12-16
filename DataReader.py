@@ -6,13 +6,16 @@ from Crypto.Hash import MD5
 
 
 class DataReader:
-    def __init__(self):
-        self.data_dir = 'data'
-        self.downloaded_zip = 'fan.zip'
-        self.url_resources = 'https://zenodo.org/record/3384388/files/6_dB_fan.zip?download'
+    def __init__(self, data_dir):
+        self.data_dir = data_dir
+        self._downloaded_zip = 'fan.zip'
+        self._url_resources = 'https://zenodo.org/record/3384388/files/6_dB_fan.zip?download'
+
+    @property
+    def data_Dir(self):
+        return self.data_dir
 
     def get_Data(self):
-
         if not os.path.exists(self.data_dir):
             print('Data directory does not exist, creating them.')
             os.makedirs(self.data_dir, exist_ok=True)
