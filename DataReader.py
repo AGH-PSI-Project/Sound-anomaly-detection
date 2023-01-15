@@ -1,11 +1,10 @@
-# Python libraries:
-import os
-import urllib.request
 import zipfile
-from Crypto.Hash import MD5
+import urllib.request
+import os
+import tools.utils
 
 
-class DataReader:
+class DataDownloader:
     def __init__(self, data_dir):
         self.data_dir = data_dir
         self._downloaded_zip = 'fan.zip'
@@ -35,22 +34,10 @@ class DataReader:
 
             # Checking file integrity: computing MD5 hash
             original_md5 = '0890f7d3c2fd8448634e69ff1d66dd47'
-            if original_md5 == get_MD5(self.downloaded_zip):
+            downloaded_md5 = tools.utils.md5('/tmp/fan.zip')
+            if original_md5 == downloaded_md5:
                 with zipfile.ZipFile('output_document', 'r') as zip_ref:
                     zip_ref.extractall(self.data_dir)
             else:
                 raise Exception(
                     'Downloaded file was corrupted, retry the download.')
-
-
-def get_MD5(file_path):
-    chunk_size = 8192
-    h = MD5.new()
-    with open(file_path, 'rb') as f:
-        while True:
-            chunk = f.read(chunk_size)
-            if len(chunk):
-                h.update(chunk)
-            else:
-                break
-        return h.hexdigest()
