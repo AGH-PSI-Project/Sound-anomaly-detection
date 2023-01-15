@@ -1,3 +1,4 @@
+#%%
 from DataReader import DataDownloader
 from DataExplorer import DataExplorer
 import os
@@ -20,3 +21,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# %%
