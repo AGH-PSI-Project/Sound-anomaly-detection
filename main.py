@@ -1,4 +1,4 @@
-#%%
+# %%
 from DataReader import DataDownloader
 from DataExplorer import DataExplorer
 import os
@@ -17,6 +17,8 @@ def main():
     data_explorer = DataExplorer(data_dir_name)
     data_explorer.load_sound_files()
     data_explorer.visualize_signals()
+    data_explorer.visualize_fourier_transofrm_partial()
+    data_explorer.visualize_spectograms_partial()
 
 
 if __name__ == "__main__":
